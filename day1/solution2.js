@@ -9,6 +9,9 @@ function isCharNumber(c) {
 }
 
 //this is ugly, probably better solution
+//the reason is that when we have something like 
+//eightwothree, we want it to be transformed to 823, not eigh23
+//so we keep some letters when transforming found substring to digit in case there is same char used by numbers
 function replaceSpelledDigitsWithDigits(s) {
     return s.replaceAll("one", 'o1e')
             .replaceAll("two", 't2o')
