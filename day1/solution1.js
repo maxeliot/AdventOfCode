@@ -1,10 +1,8 @@
-// Node.js program to demonstrate 
-// the fs.readFile() method 
+var fs = require('fs');
+const path = require('path');
+const input = path.join(__dirname, '/input.txt');
 
-// Include fs module 
-var fs = require('fs'); 
-
-var lines = fs.readFileSync("./input.txt", "utf8").split("\n");
+var lines = fs.readFileSync(input, "utf8").split("\n");
 
 function isCharNumber(c) {
     return c >= '0' && c <= '9';
