@@ -16,24 +16,36 @@ for(let i = 0; i < network.length; i++) {
     networkMap.set(node, [destinations[0].slice(1), destinations[1].slice(0, -1)]);
 }
 
+function nbrSteps(currNode) {
+    let stepsCount = 0;
+    for(let i = 0; i < leftRight.length; i++) {
+        if(leftRight[i] == 'L') {
+            currNode = networkMap.get(currNode)[0];
+        } else {
+            currNode = networkMap.get(currNode)[1];
+        }
+        
+        stepsCount++;
+        if(currNode.charAt(2) == 'Z') {
+            break;
+        }
+        if(i == leftRight.length - 1) {
+            i = -1;
+        }
+    }
+    return stepsCount
+}
+
 
 let startingNodes = Array.from(networkMap.keys()).filter(s => s.charAt(2) == 'A');
-log(startingNodes);
-let currNode = 'AAA';
-let stepsCount = 0;
-for(let i = 0; i < leftRight.length; i++) {
-    if(leftRight[i] == 'L') {
-        currNode = networkMap.get(currNode)[0];
-    } else {
-        currNode = networkMap.get(currNode)[1];
-    }
-    
-    stepsCount++;
-    if(currNode == 'ZZZ') {
-        break;
-    }
-    if(i == leftRight.length - 1) {
-        i = -1;
-    }
+startingNodes = startingNodes.map(startingNode => nbrSteps(startingNode));
+
+function gcd(a, b) {
+    return !b ? a : gcd(b, a % b);
 }
-//log(stepsCount);
+
+function lcm(a, b) {
+    return (a * b) / gcd(a, b);   
+}
+
+log(startingNodes.reduceRight((a, b) => lcm(a,b)));
