@@ -24,12 +24,13 @@ for(let i = 0; i < leftRight.length; i++) {
     } else {
         currNode = networkMap.get(currNode)[1];
     }
+    
     stepsCount++;
     if(currNode == 'ZZZ') {
         break;
     }
     if(i == leftRight.length - 1) {
-        i = 0;
+        i = -1;
     }
 }
 log(stepsCount);
